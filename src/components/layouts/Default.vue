@@ -1,23 +1,49 @@
 <template>
-  <div class="layout-wrapper">
+  <div class="layout-wrapper" v-if="ready">
     <div class="navbar-wrapper">
       <div class="navbar">
         <label for>Type ip address here</label>
-        <input type="text" name="ip-input" id="ip" class="input-ip" :placeholder="ip" />
+        <input
+          type="text"
+          name="ip-input"
+          id="ip"
+          class="input-ip"
+          :placeholder="ip"
+        />
       </div>
     </div>
-    <div class="information-wrapper">d</div>
+    <div class="information-container">
+      <Information :data="data" />
+    </div>
   </div>
 </template>
 
 <script>
+import Information from "../information/Information";
 export default {
   name: "Default",
+  components: {
+    Information,
+  },
   data() {
     return {
-      ip: "232.232.0.12"
+      ip: "232.232.0.12",
+      data: [],
+      ready: false,
     };
-  }
+  },
+  methods: {
+    handleGetData() {
+      this.$http.get(`http://ip-api.com/json/`).then((res) => {
+        this.data = res.data;
+        this.ready = true;
+        console.log(res.data);
+      });
+    },
+  },
+  created() {
+    this.handleGetData();
+  },
 };
 </script>
 
@@ -72,9 +98,11 @@ export default {
       }
     }
   }
-  .information-wrapper {
+  .information-container {
     width: 100%;
     height: 83%;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 </style>
