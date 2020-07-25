@@ -8,7 +8,9 @@
           name="ip-input"
           id="ip"
           class="input-ip"
-          :placeholder="ip"
+          :placeholder="data.query"
+          v-model="query"
+          v-on:keyup.enter="handleGetData"
         />
       </div>
     </div>
@@ -23,27 +25,27 @@ import Information from "../information/Information";
 export default {
   name: "Default",
   components: {
-    Information,
+    Information
   },
   data() {
     return {
-      ip: "232.232.0.12",
+      query: "",
       data: [],
-      ready: false,
+      ready: false
     };
   },
   methods: {
     handleGetData() {
-      this.$http.get(`http://ip-api.com/json/`).then((res) => {
+      this.$http.get(`http://ip-api.com/json/${this.query}`).then(res => {
         this.data = res.data;
         this.ready = true;
         console.log(res.data);
       });
-    },
+    }
   },
   created() {
     this.handleGetData();
-  },
+  }
 };
 </script>
 
