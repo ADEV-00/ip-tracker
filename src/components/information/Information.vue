@@ -1,10 +1,7 @@
 <template>
-  <div
-    class="info-wrapper"
-    :class="{
+  <div class="info-wrapper" :class="{
       'info-wrapper-collapse': collapse,
-    }"
-  >
+    }">
     <div class="info-title" @click="collapse = !collapse">Information</div>
     <div class="info-item" :class="{ 'info-item-collapse': collapse }">
       <p>IP:</p>
@@ -71,12 +68,12 @@ export default {
   props: ["data"],
   data() {
     return {
-      collapse: false,
+      collapse: false
     };
   },
   created() {
     console.log("Information data" + this.data);
-  },
+  }
 };
 </script>
 
@@ -93,6 +90,7 @@ export default {
   flex-direction: column;
   z-index: 10;
   transition: all 0.2s ease-in;
+  overflow: hidden;
 
   .info-title {
     font-weight: 600;
@@ -132,6 +130,5 @@ export default {
   height: 4%;
 }
 .info-item-collapse {
-  display: none !important;
 }
 </style>
