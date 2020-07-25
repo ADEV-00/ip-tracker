@@ -39,11 +39,15 @@ export default {
   },
   methods: {
     handleGetData() {
-      this.$http.get(`http://ip-api.com/json/${this.query}`).then((res) => {
-        this.data = res.data;
-        this.ready = true;
-        console.log(res.data);
-      });
+      this.$http
+        .get(
+          `http://ip-api.com/json/${this.query}?fields=status,message,country,countryCode,region,regionName,city,lat,lon,timezone,isp,as,asname,mobile,proxy,hosting,query`
+        )
+        .then((res) => {
+          this.data = res.data;
+          this.ready = true;
+          console.log(res.data);
+        });
     },
   },
   created() {
