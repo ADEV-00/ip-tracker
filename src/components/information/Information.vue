@@ -81,6 +81,7 @@ export default {
   padding: 20px;
   display: flex;
   flex-direction: column;
+  z-index: 10;
 
   .info-title {
     font-weight: 600;
