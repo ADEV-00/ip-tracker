@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Home from "../components/layouts/Default.vue";
 
 Vue.use(VueRouter);
 
@@ -8,6 +9,11 @@ const routes = [
     path: "/",
     name: "Home",
     component: () => import("../components/layouts/Default.vue"),
+  },
+  {
+    path: "*",
+    name: "catchAll",
+    component: Home,
   },
 ];
 
